@@ -9,9 +9,10 @@ RUN mkdir /var/run/sshd
 RUN echo 'root:root' |chpasswd
 RUN sed -ri 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-RUN git clone https://github.com/tmux/tmux.git /home/source/tmux && cd /home/source/tmux && sh autogen.sh && ./configure && make && make install
-RUN git clone https://github.com/shadowsocks/simple-obfs.git /home/source/simple-obfs && cd /home/source/simple-obfs && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
-RUN git clone https://github.com/shadowsocks/shadowsocks-libev.git /home/source/shadowsocks-libev && cd /home/source/shadowsocks-libev && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
+RUN set -ex \
+&& git clone https://github.com/tmux/tmux.git /home/source/tmux && cd /home/source/tmux && sh autogen.sh && ./configure && make && make install \
+&& git clone https://github.com/shadowsocks/simple-obfs.git /home/source/simple-obfs && cd /home/source/simple-obfs && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install \
+&& git clone https://github.com/shadowsocks/shadowsocks-libev.git /home/source/shadowsocks-libev && cd /home/source/shadowsocks-libev && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
 
 EXPOSE 22
 
