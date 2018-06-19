@@ -3,7 +3,7 @@ MAINTAINER Kalagxw
 
 RUN apt-get update
 
-RUN apt-get install --no-install-recommends -y htop git-core openssh-server gettext build-essential autoconf libtool libpcre3-dev asciidoc xmlto libev-dev libc-ares-dev automake libmbedtls-dev libsodium-dev libevent-dev libncurses5-dev make autoconf automake pkg-config  build-essential autoconf libtool libssl-dev libpcre3-dev libev-dev asciidoc xmlto automake nano
+RUN apt-get install --no-install-recommends -y htop git openssh-server gettext build-essential autoconf libtool libpcre3-dev asciidoc xmlto libev-dev libc-ares-dev automake libmbedtls-dev libsodium-dev libevent-dev libncurses5-dev make autoconf automake pkg-config  build-essential autoconf libtool libssl-dev libpcre3-dev libev-dev asciidoc xmlto automake nano
 RUN mkdir /var/run/sshd
 
 RUN echo 'root:root' |chpasswd
