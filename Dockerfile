@@ -9,9 +9,9 @@ RUN mkdir /var/run/sshd
 RUN echo 'root:root' |chpasswd
 RUN sed -ri 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-RUN cd ~ && git clone https://github.com/tmux/tmux.git && cd tmux && sh autogen.sh && ./configure && make && make install
-RUN cd ~ && git clone https://github.com/shadowsocks/simple-obfs.git && cd simple-obfs && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
-RUN cd ~ && git clone https://github.com/shadowsocks/shadowsocks-libev.git && cd shadowsocks-libev && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
+RUN cd /root && git clone https://github.com/tmux/tmux.git && cd tmux && sh autogen.sh && ./configure && make && make install
+RUN cd /root && git clone https://github.com/shadowsocks/simple-obfs.git && cd simple-obfs && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
+RUN cd /root && git clone https://github.com/shadowsocks/shadowsocks-libev.git && cd shadowsocks-libev && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
 
 EXPOSE 22
 
