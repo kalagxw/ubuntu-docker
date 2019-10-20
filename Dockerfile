@@ -22,7 +22,6 @@ RUN echo 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAttCOKBNadAC5s4yE5JRIZ24UvZaB6K4mlU
 
 RUN set -ex \
 && git clone https://github.com/tmux/tmux.git /home/source/tmux && cd /home/source/tmux && sh autogen.sh && ./configure && make && make install \
-&& git clone https://github.com/shadowsocks/simple-obfs.git /home/source/simple-obfs && cd /home/source/simple-obfs && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install \	
 && git clone https://github.com/shadowsocks/shadowsocks-libev.git /home/source/shadowsocks-libev && cd /home/source/shadowsocks-libev && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
 RUN sed -i "/^# some more ls aliases/a\alias tmux='tmux -2 -u'" /root/.bashrc
 EXPOSE 22
