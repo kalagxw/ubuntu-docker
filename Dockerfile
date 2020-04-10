@@ -22,7 +22,8 @@ RUN rm -rf /etc/ssh/ssh_host_rsa_key && ssh-keygen -t rsa -b 2048 -f /etc/ssh/ss
 RUN mkdir -p /root/.ssh
 RUN echo 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAttCOKBNadAC5s4yE5JRIZ24UvZaB6K4mlU+txxAfmfyepuPlJw0Da6YX6iMUqj5iIsaYrCMUjszAsbNomnxfYKwVbFpnVZtMJVLeu1VLhCklYM4Btu0Q+5NalUQzmvmUx3Cc3Cr/BXmTzXVWDeyBGhdFkrMCdspS/xd9SU9wcpcOGxb8bRk3EWQS95ejdEL2S0F3t9E2PWEXrtk3JfWjR3IsY1hSJAAsHAd2/sQasAYktmJhZp2l+/E2NoSvrNrgTMZm5senQYhvAH4jn43ScxWqWbT2SLeGhQ/q0YEouscKoJLLEdijPx+yphh4TU8TDMZe+9oj9XMjAz8EHZqjWQ=='>/root/.ssh/authorized_keys
 
-#中文
+# Set the locale
+RUN apt-get install -y locales
 RUN echo 'LANG="zh_CN.UTF-8"' > /etc/default/locale && echo 'LANGUAGE="zh_CN:en"' > /etc/default/locale && sudo locale-gen zh_CN.UTF-8
 
 RUN set -ex \
