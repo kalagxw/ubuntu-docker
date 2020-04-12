@@ -34,6 +34,8 @@ RUN set -ex \
 && git clone https://github.com/tmux/tmux.git /home/source/tmux && cd /home/source/tmux && sh autogen.sh && ./configure && make && make install \
 && git clone https://github.com/shadowsocks/shadowsocks-libev.git /home/source/shadowsocks-libev && cd /home/source/shadowsocks-libev && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
 RUN sed -i "/^# some more ls aliases/a\alias tmux='tmux -2 -u'" /root/.bashrc
+
+ENV LANG=zh_CN.UTF-8 LANGUAGE=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8
 EXPOSE 22
 
 CMD    ["/usr/sbin/sshd", "-D"]
