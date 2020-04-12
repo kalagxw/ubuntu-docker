@@ -24,7 +24,7 @@ RUN echo 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAttCOKBNadAC5s4yE5JRIZ24UvZaB6K4mlU
 
 # Set the locale
 RUN apt-get install -y locales
-RUN echo 'LANG="zh_CN.UTF-8"' > /etc/default/locale && echo 'LANGUAGE="zh_CN:en"' > /etc/default/locale && sudo locale-gen zh_CN.UTF-8
+RUN echo 'LANG="zh_CN.UTF-8"' > /etc/default/locale && echo 'LANGUAGE="zh_CN:en"' >> /etc/default/locale && sudo locale-gen zh_CN.UTF-8
 
 RUN set -ex \
 && git clone https://github.com/tmux/tmux.git /home/source/tmux && cd /home/source/tmux && sh autogen.sh && ./configure && make && make install \
