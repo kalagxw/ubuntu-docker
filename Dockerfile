@@ -1,10 +1,18 @@
 FROM       ubuntu:20.04
 MAINTAINER Kalagxw
 
-RUN apt-get update \
-&& export DEBIAN_FRONTEND=noninteractive && apt-get upgrade -y \
-&& apt-get install tzdata \
-&& ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && dpkg-reconfigure -f noninteractive tzdata \
+ENV DEBIAN_FRONTEND=noninteractive
+RUN set -eux && \
+    apt-get update && \
+    apt-get install -y locales tzdata xfonts-wqy && \
+    locale-gen zh_CN.UTF-8 && \
+    update-locale LANG=zh_CN.UTF-8 LANGUAGE=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8 && \
+    ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    dpkg-reconfigure --frontend noninteractive tzdata && \
+    find /var/lib/apt/lists -type f -delete && \
+    find /var/cache -type f -delete
+
+RUN apt-get upgrade -y \
 && apt-get install --no-install-recommends -y sudo bison byacc curl psmisc dialog apt-utils ca-certificates htop git openssh-server gettext build-essential autoconf libtool libpcre3-dev asciidoc xmlto libev-dev libc-ares-dev automake libmbedtls-dev libsodium-dev libevent-dev libncurses5-dev make autoconf automake pkg-config  build-essential autoconf libtool libssl-dev libpcre3-dev libev-dev asciidoc xmlto automake nano
 RUN mkdir /var/run/sshd
 
@@ -21,10 +29,6 @@ RUN echo 'HostKey /etc/ssh/ssh_host_rsa_key'>/etc/ssh/sshd_config
 RUN rm -rf /etc/ssh/ssh_host_rsa_key && ssh-keygen -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key
 RUN mkdir -p /root/.ssh
 RUN echo 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAttCOKBNadAC5s4yE5JRIZ24UvZaB6K4mlU+txxAfmfyepuPlJw0Da6YX6iMUqj5iIsaYrCMUjszAsbNomnxfYKwVbFpnVZtMJVLeu1VLhCklYM4Btu0Q+5NalUQzmvmUx3Cc3Cr/BXmTzXVWDeyBGhdFkrMCdspS/xd9SU9wcpcOGxb8bRk3EWQS95ejdEL2S0F3t9E2PWEXrtk3JfWjR3IsY1hSJAAsHAd2/sQasAYktmJhZp2l+/E2NoSvrNrgTMZm5senQYhvAH4jn43ScxWqWbT2SLeGhQ/q0YEouscKoJLLEdijPx+yphh4TU8TDMZe+9oj9XMjAz8EHZqjWQ=='>/root/.ssh/authorized_keys
-
-# Set the locale
-RUN apt-get install -y locales
-RUN echo 'LANG="zh_CN.UTF-8"' > /etc/default/locale && echo 'LANGUAGE="zh_CN:en"' >> /etc/default/locale && sudo locale-gen zh_CN.UTF-8
 
 RUN set -ex \
 && git clone https://github.com/tmux/tmux.git /home/source/tmux && cd /home/source/tmux && sh autogen.sh && ./configure && make && make install \
