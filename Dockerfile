@@ -1,13 +1,11 @@
 FROM       ubuntu:20.04
 MAINTAINER Kalagxw
 
-
-ENV DEBIAN_FRONTEND=noninteractive
-
 RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
     && localedef -i zh_CN -c -f UTF-8 -A /usr/share/locale/locale.alias zh_CN.UTF-8
 ENV LANG zh_CN.utf8
 
+ENV DEBIAN_FRONTEND=noninteractive
 RUN set -eux && \
     apt-get install -y tzdata && \
     ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
