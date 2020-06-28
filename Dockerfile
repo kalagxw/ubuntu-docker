@@ -7,7 +7,7 @@ ENV LANG zh_CN.utf8
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN set -eux && \
-    apt-get install -y tzdata && \
+    apt-get update && apt-get install -y tzdata && \
     ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
     find /var/lib/apt/lists -type f -delete && \
@@ -36,7 +36,7 @@ RUN set -ex \
 && git clone https://github.com/shadowsocks/shadowsocks-libev.git /home/source/shadowsocks-libev && cd /home/source/shadowsocks-libev && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
 RUN sed -i "/^# some more ls aliases/a\alias tmux='tmux -2 -u'" /root/.bashrc
 
-ENV LANG=zh_CN.UTF-8 LANGUAGE=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8
+#ENV LANG=zh_CN.UTF-8 LANGUAGE=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8
 EXPOSE 22
 
 CMD    ["/usr/sbin/sshd", "-D"]
