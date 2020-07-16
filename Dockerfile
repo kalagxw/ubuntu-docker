@@ -1,4 +1,4 @@
-FROM       ubuntu:20.04
+FROM       kalagxw/gceubuntu20:tagname:v1
 MAINTAINER Kalagxw
 
 ENV DEBIAN_FRONTEND=noninteractive
