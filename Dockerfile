@@ -1,10 +1,6 @@
 FROM       ubuntu:20.04
 MAINTAINER Kalagxw
 
-RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
-    && localedef -i zh_CN -c -f UTF-8 -A /usr/share/locale/locale.alias zh_CN.UTF-8
-ENV LANG zh_CN.utf8
-
 ENV DEBIAN_FRONTEND=noninteractive
 RUN set -eux && \
     apt-get update && apt-get install -y tzdata && \
@@ -14,7 +10,7 @@ RUN set -eux && \
     find /var/cache -type f -delete
 
 RUN apt-get update && apt-get upgrade -y \
-&& apt-get install --no-install-recommends -y sudo bison byacc curl psmisc dialog apt-utils ca-certificates htop git openssh-server gettext build-essential autoconf libtool libpcre3-dev asciidoc xmlto libev-dev libc-ares-dev automake libmbedtls-dev libsodium-dev libevent-dev libncurses5-dev make autoconf automake pkg-config  build-essential autoconf libtool libssl-dev libpcre3-dev libev-dev asciidoc xmlto automake nano
+&& apt-get install --no-install-recommends -y sudo bison byacc curl rsync psmisc dialog apt-utils ca-certificates htop git openssh-server gettext build-essential autoconf libtool libpcre3-dev asciidoc xmlto libev-dev libc-ares-dev automake libmbedtls-dev libsodium-dev libevent-dev libncurses5-dev make autoconf automake pkg-config  build-essential autoconf libtool libssl-dev libpcre3-dev libev-dev asciidoc xmlto automake nano
 RUN mkdir /var/run/sshd
 
 RUN sed -i \
@@ -36,7 +32,7 @@ RUN set -ex \
 && git clone https://github.com/shadowsocks/shadowsocks-libev.git /home/source/shadowsocks-libev && cd /home/source/shadowsocks-libev && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
 RUN sed -i "/^# some more ls aliases/a\alias tmux='tmux -2 -u'" /root/.bashrc
 
-#ENV LANG=zh_CN.UTF-8 LANGUAGE=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8
+ENV LANG C.UTF-8
 EXPOSE 22
 
 CMD    ["/usr/sbin/sshd", "-D"]
