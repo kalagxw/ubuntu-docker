@@ -1,4 +1,4 @@
-FROM       kalagxw/aria2:v1
+FROM       kalagxw/aria2:v2
 MAINTAINER Kalagxw
 
 ENV DEBIAN_FRONTEND=noninteractive
