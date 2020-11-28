@@ -19,7 +19,8 @@ RUN sed -i \
 	/etc/ssh/sshd_config
   
 RUN sed -i '/^#Host_Key/'d /etc/ssh/sshd_config
-RUN sed -i '/^Host_Key/'d /etc/ssh/sshd_config#RUN echo 'HostKey /etc/ssh/ssh_host_rsa_key'>/etc/ssh/sshd_config
+RUN sed -i '/^Host_Key/'d /etc/ssh/sshd_config
+RUN echo 'HostKey /etc/ssh/ssh_host_rsa_key'>/etc/ssh/sshd_config
 
 #生成ssh-key与配置ssh-key##
 RUN rm -rf /etc/ssh/ssh_host_rsa_key && ssh-keygen -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key
