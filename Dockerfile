@@ -32,7 +32,7 @@ RUN echo 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAttCOKBNadAC5s4yE5JRIZ24UvZaB6K4mlU
 #&& git clone https://github.com/shadowsocks/shadowsocks-libev.git /home/source/shadowsocks-libev && cd /home/source/shadowsocks-libev && git submodule update --init --recursive && ./autogen.sh && ./configure && make && make install
 #RUN sed -i "/^# some more ls aliases/a\alias tmux='tmux -2 -u'" /root/.bashrc
 
-ENV LANG C.UTF-8
+ENV LC_ALL "zh_CN.UTF-8"
 EXPOSE 22
 
 CMD    ["/usr/sbin/sshd", "-D"]
