@@ -1,4 +1,4 @@
-FROM       linuxserver/qbittorrent:14.2.0.99201912180418-6819-118af03ubuntu18.04.1-ls64
+FROM       linuxserver/qbittorrent:14.2.0.99201912180418-6819-118af03ubuntu18.04.1-ls62
 MAINTAINER Kalagxw
 
 ENV DEBIAN_FRONTEND=noninteractive
