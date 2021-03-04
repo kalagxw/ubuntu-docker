@@ -9,7 +9,7 @@ RUN set -eux && \
     find /var/lib/apt/lists -type f -delete && \
     find /var/cache -type f -delete
     
-RUN mkdir /run/sshd
+RUN mkdir -p /run/sshd
 
 RUN sed -i \
 	-e 's~^PasswordAuthentication yes~PasswordAuthentication no~g' \
